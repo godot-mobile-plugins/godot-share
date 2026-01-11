@@ -40,7 +40,7 @@ If using both Android & iOS, ensure **same addon interface version**.
 
 **Options:**
 1. **AssetLib**
-	- Search for `In-app Review`
+	- Search for `Share`
 	- Click `Download` → `Install`
 	- Install to project root, `Ignore asset root` checked
 	- Enable via **Project → Project Settings → Plugins**
