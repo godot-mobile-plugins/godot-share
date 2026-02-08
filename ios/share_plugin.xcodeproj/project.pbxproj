@@ -3,14 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0793DB442ECC5D6B00679D5D /* ActiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0793DB432ECC5D6B00679D5D /* ActiveViewController.swift */; };
-		515DBA0925EE9E1E00187A4B /* Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 515DBA0825EE9E1E00187A4B /* Share.swift */; };
-		90CAAA9924E71FF10013969F /* share_plugin.mm in Sources */ = {isa = PBXBuildFile; fileRef = 90CAAA9824E71FF10013969F /* share_plugin.mm */; };
-		90CAAAA424E724C50013969F /* share_plugin_implementation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 90CAAAA324E724C50013969F /* share_plugin_implementation.mm */; };
+		0795A1D52F34A90300AD567C /* Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0795A1CE2F34A90300AD567C /* Share.swift */; };
+		0795A1D62F34A90300AD567C /* share_plugin_bootstrap.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0795A1D22F34A90300AD567C /* share_plugin_bootstrap.mm */; };
+		0795A1D72F34A90300AD567C /* ActiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0795A1CD2F34A90300AD567C /* ActiveViewController.swift */; };
+		0795A1D82F34A90300AD567C /* share_plugin.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0795A1D02F34A90300AD567C /* share_plugin.mm */; };
 		94A1B0B2910D06DA0F4D3D3C /* Pods_share_plugin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 380C444E6383B0C8ACA7CA7D /* Pods_share_plugin.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,18 +27,17 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0793DB432ECC5D6B00679D5D /* ActiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveViewController.swift; sourceTree = "<group>"; };
+		0795A1CD2F34A90300AD567C /* ActiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveViewController.swift; sourceTree = "<group>"; };
+		0795A1CE2F34A90300AD567C /* Share.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Share.swift; sourceTree = "<group>"; };
+		0795A1CF2F34A90300AD567C /* share_plugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = share_plugin.h; sourceTree = "<group>"; };
+		0795A1D02F34A90300AD567C /* share_plugin.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = share_plugin.mm; sourceTree = "<group>"; };
+		0795A1D12F34A90300AD567C /* share_plugin_bootstrap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = share_plugin_bootstrap.h; sourceTree = "<group>"; };
+		0795A1D22F34A90300AD567C /* share_plugin_bootstrap.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = share_plugin_bootstrap.mm; sourceTree = "<group>"; };
+		0795A1D32F34A90300AD567C /* share_plugin-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "share_plugin-Bridging-Header.h"; sourceTree = "<group>"; };
 		1A3D1E30D9DC57319C20B62B /* Pods-share_plugin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-share_plugin.release.xcconfig"; path = "Target Support Files/Pods-share_plugin/Pods-share_plugin.release.xcconfig"; sourceTree = "<group>"; };
 		380C444E6383B0C8ACA7CA7D /* Pods_share_plugin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_share_plugin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		403D7C7BCFBA671DEF15AE95 /* Pods-share_plugin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-share_plugin.debug.xcconfig"; path = "Target Support Files/Pods-share_plugin/Pods-share_plugin.debug.xcconfig"; sourceTree = "<group>"; };
-		515DBA0825EE9E1E00187A4B /* Share.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Share.swift; sourceTree = "<group>"; };
 		90CAAA9424E71FF10013969F /* libshare_plugin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libshare_plugin.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		90CAAA9724E71FF10013969F /* share_plugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = share_plugin.h; sourceTree = "<group>"; };
-		90CAAA9824E71FF10013969F /* share_plugin.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = share_plugin.mm; sourceTree = "<group>"; };
-		90CAAAA324E724C50013969F /* share_plugin_implementation.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = share_plugin_implementation.mm; sourceTree = "<group>"; };
-		90CAAAA524E724D00013969F /* share_plugin_implementation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = share_plugin_implementation.h; sourceTree = "<group>"; };
-		AAE936A0178A8EA9BB753CEA /* Pods-share_plugin_implementation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-share_plugin_implementation.debug.xcconfig"; path = "Target Support Files/Pods-inapp_review_plugin/Pods-share_plugin_implementation.debug.xcconfig"; sourceTree = "<group>"; };
-		D5F7A9D28867FD798F31BF3B /* Pods-share_plugin_implementation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-share_plugin_implementation.release.xcconfig"; path = "Target Support Files/Pods-inapp_review_plugin/Pods-share_plugin_implementation.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,13 +52,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0795A1D42F34A90300AD567C /* src */ = {
+			isa = PBXGroup;
+			children = (
+				0795A1CD2F34A90300AD567C /* ActiveViewController.swift */,
+				0795A1CE2F34A90300AD567C /* Share.swift */,
+				0795A1CF2F34A90300AD567C /* share_plugin.h */,
+				0795A1D02F34A90300AD567C /* share_plugin.mm */,
+				0795A1D12F34A90300AD567C /* share_plugin_bootstrap.h */,
+				0795A1D22F34A90300AD567C /* share_plugin_bootstrap.mm */,
+				0795A1D32F34A90300AD567C /* share_plugin-Bridging-Header.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
 		66EA7AD27171A8F93A267403 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
 				403D7C7BCFBA671DEF15AE95 /* Pods-share_plugin.debug.xcconfig */,
 				1A3D1E30D9DC57319C20B62B /* Pods-share_plugin.release.xcconfig */,
-				AAE936A0178A8EA9BB753CEA /* Pods-share_plugin_implementation.debug.xcconfig */,
-				D5F7A9D28867FD798F31BF3B /* Pods-share_plugin_implementation.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -67,7 +78,7 @@
 		90CAAA8B24E71FF10013969F = {
 			isa = PBXGroup;
 			children = (
-				90CAAA9624E71FF10013969F /* share */,
+				0795A1D42F34A90300AD567C /* src */,
 				90CAAA9524E71FF10013969F /* Products */,
 				90CAAAA824E72A8A0013969F /* Frameworks */,
 				66EA7AD27171A8F93A267403 /* Pods */,
@@ -80,19 +91,6 @@
 				90CAAA9424E71FF10013969F /* libshare_plugin.a */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		90CAAA9624E71FF10013969F /* share */ = {
-			isa = PBXGroup;
-			children = (
-				0793DB432ECC5D6B00679D5D /* ActiveViewController.swift */,
-				90CAAA9724E71FF10013969F /* share_plugin.h */,
-				90CAAA9824E71FF10013969F /* share_plugin.mm */,
-				90CAAAA524E724D00013969F /* share_plugin_implementation.h */,
-				90CAAAA324E724C50013969F /* share_plugin_implementation.mm */,
-				515DBA0825EE9E1E00187A4B /* Share.swift */,
-			);
-			path = share;
 			sourceTree = "<group>";
 		};
 		90CAAAA824E72A8A0013969F /* Frameworks */ = {
@@ -187,10 +185,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0793DB442ECC5D6B00679D5D /* ActiveViewController.swift in Sources */,
-				90CAAAA424E724C50013969F /* share_plugin_implementation.mm in Sources */,
-				515DBA0925EE9E1E00187A4B /* Share.swift in Sources */,
-				90CAAA9924E71FF10013969F /* share_plugin.mm in Sources */,
+				0795A1D52F34A90300AD567C /* Share.swift in Sources */,
+				0795A1D62F34A90300AD567C /* share_plugin_bootstrap.mm in Sources */,
+				0795A1D72F34A90300AD567C /* ActiveViewController.swift in Sources */,
+				0795A1D82F34A90300AD567C /* share_plugin.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,8 +311,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/godot",
-					"$(SRCROOT)/godot/platform/ios",
+					"$(inherited)",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -345,7 +342,6 @@
 					"-fblocks",
 					"-fvisibility=hidden",
 					"-MMD",
-					"-MT",
 					"-fno-exceptions",
 					"-Wno-ambiguous-macro",
 					"-Wall",
@@ -368,19 +364,20 @@
 					"-DIPHONE_ENABLED",
 					"-DUNIX_ENABLED",
 					"-DCOREAUDIO_ENABLED",
+					"-DAPPLE_EMBEDDED_ENABLED",
+					"-isystem",
+					"$(SRCROOT)/godot",
+					"-isystem",
+					"$(SRCROOT)/godot/drivers/apple_embedded",
+					"-isystem",
+					"$(SRCROOT)/godot/platform/ios",
 				);
 				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-framework", "os",
-					"-lswiftCore",
-					"-lswiftDispatch",
-					"-lswiftObjectiveC",
-					"-lswiftUIKit",
-					"-lswiftFoundation",
+					"$(inherited)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "share/share_plugin-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "src/share_plugin-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.9;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -393,8 +390,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/godot",
-					"$(SRCROOT)/godot/platform/ios",
+					"$(inherited)",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -419,7 +415,6 @@
 					"-fblocks",
 					"-fvisibility=hidden",
 					"-MMD",
-					"-MT",
 					"-fno-exceptions",
 					"-Wno-ambiguous-macro",
 					"-Wall",
@@ -439,19 +434,20 @@
 					"-DIPHONE_ENABLED",
 					"-DUNIX_ENABLED",
 					"-DCOREAUDIO_ENABLED",
+					"-DAPPLE_EMBEDDED_ENABLED",
+					"-isystem",
+					"$(SRCROOT)/godot",
+					"-isystem",
+					"$(SRCROOT)/godot/drivers/apple_embedded",
+					"-isystem",
+					"$(SRCROOT)/godot/platform/ios",
 				);
 				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-framework", "os",
-					"-lswiftCore",
-					"-lswiftDispatch",
-					"-lswiftObjectiveC",
-					"-lswiftUIKit",
-					"-lswiftFoundation",
+					"$(inherited)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "share/share_plugin-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "src/share_plugin-Bridging-Header.h";
 				SWIFT_VERSION = 5.9;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
