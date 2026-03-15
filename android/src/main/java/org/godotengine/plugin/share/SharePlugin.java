@@ -161,7 +161,9 @@ public class SharePlugin extends GodotPlugin {
 
 			@Override
 			public void onReceive(Context context, Intent intent) {
-				if (handled) return;
+				if (handled) {
+					return;
+				}
 				handled = true;
 
 				unregisterChooserReceiverIfAny();
@@ -189,7 +191,8 @@ public class SharePlugin extends GodotPlugin {
 					GodotPlugin.emitSignal(getGodot(), getPluginName(), SHARE_COMPLETED_SIGNAL, cname);
 				} else {
 					// Chosen component not available; still treat as completed
-					Log.d(LOG_TAG, "Chooser invoked but chosen component was null. Emitting share_completed with 'UnknownActivity'.");
+					Log.d(LOG_TAG, "Chooser invoked but chosen component was null. Emitting share_completed with"
+							+ " 'UnknownActivity'.");
 					GodotPlugin.emitSignal(getGodot(), getPluginName(), SHARE_COMPLETED_SIGNAL, "UnknownActivity");
 				}
 			}
@@ -255,10 +258,13 @@ public class SharePlugin extends GodotPlugin {
 			unregisterChooserReceiverIfAny();
 
 			if (duration > sharedDataInProgress.getThreshold()) {
-				Log.d(LOG_TAG, String.format("onMainResume(): detected share completed via lifecycle (duration: %d ms).", duration));
+				Log.d(LOG_TAG, String.format(
+							"onMainResume(): detected share completed via lifecycle (duration: %d ms).", duration));
 				GodotPlugin.emitSignal(getGodot(), getPluginName(), SHARE_COMPLETED_SIGNAL, "UnknownActivity");
 			} else {
-				Log.d(LOG_TAG, String.format("onMainResume(): detected quick chooser dismissal; treating as canceled (duration: %d ms).", duration));
+				Log.d(LOG_TAG, String.format(
+							"onMainResume(): detected quick chooser dismissal; treating as canceled (duration: %d ms).",
+							duration));
 				GodotPlugin.emitSignal(getGodot(), getPluginName(), SHARE_CANCELED_SIGNAL);
 			}
 

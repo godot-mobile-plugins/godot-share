@@ -10,8 +10,8 @@ extends Node
 @onready var share: Share = $Share as Share
 @onready var _text_edit: TextEdit = $CanvasLayer/CenterContainer/VBoxContainer/VBoxContainer/TextEdit as TextEdit
 @onready var _label: RichTextLabel = $CanvasLayer/CenterContainer/VBoxContainer/RichTextLabel as RichTextLabel
-@onready var _android_texture_rect: TextureRect = $CanvasLayer/CenterContainer/VBoxContainer/HBoxContainer/AndroidTextureRect as TextureRect
-@onready var _ios_texture_rect: TextureRect = $CanvasLayer/CenterContainer/VBoxContainer/HBoxContainer/iOSTextureRect as TextureRect
+@onready var _android_texture_rect := %AndroidTextureRect as TextureRect
+@onready var _ios_texture_rect := %iOSTextureRect as TextureRect
 
 var _active_texture_rect: TextureRect
 

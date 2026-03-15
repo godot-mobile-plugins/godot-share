@@ -10,14 +10,14 @@ const PLUGIN_SINGLETON_NAME: String = "@pluginName@"
 
 signal share_completed(activity_type: String)
 signal share_failed(error_message: String)
-signal share_canceled()
+signal share_canceled
 
 const MIME_TYPE_TEXT: String = "text/plain"
 const MIME_TYPE_IMAGE: String = "image/*"
 
-const SIGNAL_NAME_SHARE_COMPLETED: String = "share_completed";
-const SIGNAL_NAME_SHARE_FAILED: String = "share_failed";
-const SIGNAL_NAME_SHARE_CANCELED: String = "share_canceled";
+const SIGNAL_NAME_SHARE_COMPLETED: String = "share_completed"
+const SIGNAL_NAME_SHARE_FAILED: String = "share_failed"
+const SIGNAL_NAME_SHARE_CANCELED: String = "share_canceled"
 
 @onready var _temp_image_path: String = OS.get_user_data_dir() + "/tmp_share_img_path.png"
 
@@ -51,12 +51,15 @@ func _connect_signals() -> void:
 func share_text(a_title: String, a_subject: String, a_content: String) -> void:
 	if _plugin_singleton != null:
 		_plugin_singleton.share(
-			SharedData.new()
-				.set_title(a_title)
-				.set_subject(a_subject)
-				.set_content(a_content)
-				.set_mime_type(MIME_TYPE_TEXT)
-				.get_raw_data()
+			(
+				SharedData
+				. new()
+				. set_title(a_title)
+				. set_subject(a_subject)
+				. set_content(a_content)
+				. set_mime_type(MIME_TYPE_TEXT)
+				. get_raw_data()
+			)
 		)
 	else:
 		log_error("%s plugin not initialized" % PLUGIN_SINGLETON_NAME)
@@ -72,7 +75,9 @@ func share_texture(a_texture: Texture2D, a_title: String, a_subject: String, a_c
 	share_file(_temp_image_path, MIME_TYPE_IMAGE, a_title, a_subject, a_content)
 
 
-func share_viewport(a_viewport: Viewport, a_title: String, a_subject: String, a_content: String, a_flip_y: bool = false) -> void:
+func share_viewport(
+	a_viewport: Viewport, a_title: String, a_subject: String, a_content: String, a_flip_y: bool = false
+) -> void:
 	var __image: Image = a_viewport.get_texture().get_image()
 	if a_flip_y:
 		__image.flip_y()
@@ -83,13 +88,16 @@ func share_viewport(a_viewport: Viewport, a_title: String, a_subject: String, a_
 func share_file(a_path: String, a_mime_type: String, a_title: String, a_subject: String, a_content: String) -> void:
 	if _plugin_singleton != null:
 		_plugin_singleton.share(
-			SharedData.new()
-				.set_title(a_title)
-				.set_subject(a_subject)
-				.set_content(a_content)
-				.set_mime_type(a_mime_type)
-				.set_file_path(a_path)
-				.get_raw_data()
+			(
+				SharedData
+				. new()
+				. set_title(a_title)
+				. set_subject(a_subject)
+				. set_content(a_content)
+				. set_mime_type(a_mime_type)
+				. set_file_path(a_path)
+				. get_raw_data()
+			)
 		)
 	else:
 		log_error("%s plugin not initialized" % PLUGIN_SINGLETON_NAME)

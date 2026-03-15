@@ -1,74 +1,76 @@
-[gd_scene load_steps=5 format=3 uid="uid://l8x26cvum7uc"]
+[gd_scene format=3 uid="uid://l8x26cvum7uc"]
 
 [ext_resource type="Script" uid="uid://bs7h6e1sy3ff2" path="res://Main.gd" id="1_2cf00"]
 [ext_resource type="Texture2D" uid="uid://m4tg7rfoxxbk" path="res://assets/share-android.png" id="2_gmsde"]
 [ext_resource type="Texture2D" uid="uid://dxo8m44hy2ln1" path="res://assets/share-ios.png" id="3_cm0pq"]
-[ext_resource type="Script" uid="uid://crex1flhfi0wt" path="res://addons/SharePlugin/Share.gd" id="3_i1lxr"]
+[ext_resource type="Script" uid="uid://c0q02axdexbye" path="res://addons/SharePlugin/Share.gd" id="3_i1lxr"]
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" unique_id=1517230153]
 script = ExtResource("1_2cf00")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1390605688]
 
-[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer"]
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer" unique_id=1727929517]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CenterContainer" unique_id=90143695]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/CenterContainer/VBoxContainer" unique_id=510985839]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="AndroidTextureRect" type="TextureRect" parent="CanvasLayer/CenterContainer/VBoxContainer/HBoxContainer"]
+[node name="AndroidTextureRect" type="TextureRect" parent="CanvasLayer/CenterContainer/VBoxContainer/HBoxContainer" unique_id=1652599267]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 128)
 layout_mode = 2
 texture = ExtResource("2_gmsde")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="iOSTextureRect" type="TextureRect" parent="CanvasLayer/CenterContainer/VBoxContainer/HBoxContainer"]
+[node name="iOSTextureRect" type="TextureRect" parent="CanvasLayer/CenterContainer/VBoxContainer/HBoxContainer" unique_id=448781101]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 128)
 layout_mode = 2
 texture = ExtResource("3_cm0pq")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="CanvasLayer/CenterContainer/VBoxContainer" unique_id=2011052070]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Share Demo"
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CenterContainer/VBoxContainer" unique_id=1710791707]
 custom_minimum_size = Vector2(375, 0)
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="TextEdit" type="TextEdit" parent="CanvasLayer/CenterContainer/VBoxContainer/VBoxContainer"]
+[node name="TextEdit" type="TextEdit" parent="CanvasLayer/CenterContainer/VBoxContainer/VBoxContainer" unique_id=42102177]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 placeholder_text = "Shared text"
 scroll_fit_content_height = true
 
-[node name="ShareTextureButton" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer/VBoxContainer"]
+[node name="ShareTextureButton" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer/VBoxContainer" unique_id=2147327869]
 layout_mode = 2
 text = "Share Texture"
 
-[node name="ShareViewportButton" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer/VBoxContainer"]
+[node name="ShareViewportButton" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer/VBoxContainer" unique_id=1282751825]
 layout_mode = 2
 text = "Share Viewport"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/CenterContainer/VBoxContainer" unique_id=1528168595]
 custom_minimum_size = Vector2(250, 300)
 layout_mode = 2
 
-[node name="Share" type="Node" parent="."]
+[node name="Share" type="Node" parent="." unique_id=1021779052]
 script = ExtResource("3_i1lxr")
 
 [connection signal="pressed" from="CanvasLayer/CenterContainer/VBoxContainer/VBoxContainer/ShareTextureButton" to="." method="_on_share_texture_button_pressed"]
