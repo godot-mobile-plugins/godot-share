@@ -119,11 +119,11 @@ public class SharePlugin extends GodotPlugin {
 			shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 		}
 
-		String mime_type = sharedDataInProgress.getMimeType();
-		if (mime_type == null) {
-			mime_type = MIME_TYPE_TEXT;
+		String mimeType = sharedDataInProgress.getMimeType();
+		if (mimeType == null) {
+			mimeType = MIME_TYPE_TEXT;
 		}
-		shareIntent.setType(mime_type);
+		shareIntent.setType(mimeType);
 
 		// Prepare unique action for chooser callback
 		chooserAction = activity.getPackageName() + ".CHOOSER_TARGET_SELECTED." + System.currentTimeMillis();

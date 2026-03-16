@@ -17,9 +17,6 @@ String const DATA_KEY_CONTENT = "content";
 String const DATA_KEY_FILE_PATH = "file_path";
 String const DATA_KEY_MIME_TYPE = "mime_type";
 
-String const MIME_TYPE_TEXT = "text/plain";
-String const MIME_TYPE_IMAGE = "image/*";
-
 String const SIGNAL_NAME_SHARE_COMPLETED = "share_completed";
 String const SIGNAL_NAME_SHARE_FAILED = "share_failed";
 String const SIGNAL_NAME_SHARE_CANCELED = "share_canceled";
