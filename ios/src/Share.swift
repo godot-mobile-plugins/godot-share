@@ -60,7 +60,7 @@ private let mimeTypeImage = "image/*"
 		if let filePath = filePath, let mimeType = mimeType {
 			let path = filePath.replacingOccurrences(of: "file://", with: "")
 			if mimeType == mimeTypeImage || mimeType.hasPrefix("image/"),
-			   let image = UIImage(contentsOfFile: path) {
+				let image = UIImage(contentsOfFile: path) {
 				items.append(image)
 			} else {
 				items.append(URL(fileURLWithPath: path))
@@ -72,14 +72,14 @@ private let mimeTypeImage = "image/*"
 
 	/// Configures the popover presentation for iPad.
 	private func configurePopoverIfNeeded(for activityVC: UIActivityViewController,
-										  in viewController: UIViewController) {
+										in viewController: UIViewController) {
 		guard UIDevice.current.userInterfaceIdiom == .pad else { return }
 
 		let midPoint = CGPoint(x: viewController.view.bounds.midX,
-							   y: viewController.view.bounds.midY)
+								y: viewController.view.bounds.midY)
 		activityVC.popoverPresentationController?.sourceView = viewController.view
 		activityVC.popoverPresentationController?.sourceRect = CGRect(origin: midPoint,
-																	   size: .zero)
+																		size: .zero)
 		activityVC.popoverPresentationController?.permittedArrowDirections = []
 	}
 
@@ -119,7 +119,7 @@ private let mimeTypeImage = "image/*"
 				completionHandler(.canceled, nil)
 			}
 		}
-		
+
 		// Present on main thread
 		DispatchQueue.main.async {
 			viewController.present(activityVC, animated: true, completion: nil)

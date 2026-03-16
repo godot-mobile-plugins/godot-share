@@ -30,7 +30,7 @@ final class ActiveViewController {
 		if let nav = activeVC as? UINavigationController {
 			activeVC = nav.topViewController ?? activeVC
 		} else if let tab = activeVC as? UITabBarController,
-				  let selected = tab.selectedViewController {
+				let selected = tab.selectedViewController {
 			activeVC = selected
 			if let nav = selected as? UINavigationController {
 				activeVC = nav.topViewController ?? activeVC
