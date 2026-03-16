@@ -4,11 +4,10 @@
 
 #import <Foundation/Foundation.h>
 
-#import "share_plugin_bootstrap.h"
 #import "share_plugin.h"
+#import "share_plugin_bootstrap.h"
 
 #import "core/config/engine.h"
-
 
 SharePlugin *share_plugin;
 

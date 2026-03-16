@@ -17,15 +17,11 @@ String const DATA_KEY_CONTENT = "content";
 String const DATA_KEY_FILE_PATH = "file_path";
 String const DATA_KEY_MIME_TYPE = "mime_type";
 
-String const MIME_TYPE_TEXT = "text/plain";
-String const MIME_TYPE_IMAGE = "image/*";
-
 String const SIGNAL_NAME_SHARE_COMPLETED = "share_completed";
 String const SIGNAL_NAME_SHARE_FAILED = "share_failed";
 String const SIGNAL_NAME_SHARE_CANCELED = "share_canceled";
 
-
-static NSString* getNsStringOrNil(const Dictionary &data, const String &key) {
+static NSString *getNsStringOrNil(const Dictionary &data, const String &key) {
 	if (!data.has(key)) {
 		return nil;
 	}
@@ -50,13 +46,12 @@ Error SharePlugin::share(const Dictionary &sharedData) {
 	NSLog(@"SharePlugin::share");
 
 	Share *shareInstance = [[Share alloc] initWithTitle:getNsStringOrNil(sharedData, DATA_KEY_TITLE)
-								subject:getNsStringOrNil(sharedData, DATA_KEY_SUBJECT)
-								content:getNsStringOrNil(sharedData, DATA_KEY_CONTENT)
-								filePath:getNsStringOrNil(sharedData, DATA_KEY_FILE_PATH)
-								mimeType:getNsStringOrNil(sharedData, DATA_KEY_MIME_TYPE)];
+												subject:getNsStringOrNil(sharedData, DATA_KEY_SUBJECT)
+												content:getNsStringOrNil(sharedData, DATA_KEY_CONTENT)
+											   filePath:getNsStringOrNil(sharedData, DATA_KEY_FILE_PATH)
+											   mimeType:getNsStringOrNil(sharedData, DATA_KEY_MIME_TYPE)];
 
-	[shareInstance shareWithCompletionHandler:^(enum ShareResult result, NSString * _Nullable info) {
-
+	[shareInstance shareWithCompletionHandler:^(enum ShareResult result, NSString *_Nullable info) {
 		String godotInfo = String();
 		if (info) {
 			godotInfo = String([info UTF8String]);

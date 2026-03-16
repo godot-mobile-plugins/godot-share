@@ -119,11 +119,11 @@ public class SharePlugin extends GodotPlugin {
 			shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 		}
 
-		String mime_type = sharedDataInProgress.getMimeType();
-		if (mime_type == null) {
-			mime_type = MIME_TYPE_TEXT;
+		String mimeType = sharedDataInProgress.getMimeType();
+		if (mimeType == null) {
+			mimeType = MIME_TYPE_TEXT;
 		}
-		shareIntent.setType(mime_type);
+		shareIntent.setType(mimeType);
 
 		// Prepare unique action for chooser callback
 		chooserAction = activity.getPackageName() + ".CHOOSER_TARGET_SELECTED." + System.currentTimeMillis();
@@ -161,7 +161,9 @@ public class SharePlugin extends GodotPlugin {
 
 			@Override
 			public void onReceive(Context context, Intent intent) {
-				if (handled) return;
+				if (handled) {
+					return;
+				}
 				handled = true;
 
 				unregisterChooserReceiverIfAny();
@@ -189,7 +191,8 @@ public class SharePlugin extends GodotPlugin {
 					GodotPlugin.emitSignal(getGodot(), getPluginName(), SHARE_COMPLETED_SIGNAL, cname);
 				} else {
 					// Chosen component not available; still treat as completed
-					Log.d(LOG_TAG, "Chooser invoked but chosen component was null. Emitting share_completed with 'UnknownActivity'.");
+					Log.d(LOG_TAG, "Chooser invoked but chosen component was null. Emitting share_completed with"
+							+ " 'UnknownActivity'.");
 					GodotPlugin.emitSignal(getGodot(), getPluginName(), SHARE_COMPLETED_SIGNAL, "UnknownActivity");
 				}
 			}
@@ -255,10 +258,13 @@ public class SharePlugin extends GodotPlugin {
 			unregisterChooserReceiverIfAny();
 
 			if (duration > sharedDataInProgress.getThreshold()) {
-				Log.d(LOG_TAG, String.format("onMainResume(): detected share completed via lifecycle (duration: %d ms).", duration));
+				Log.d(LOG_TAG, String.format(
+							"onMainResume(): detected share completed via lifecycle (duration: %d ms).", duration));
 				GodotPlugin.emitSignal(getGodot(), getPluginName(), SHARE_COMPLETED_SIGNAL, "UnknownActivity");
 			} else {
-				Log.d(LOG_TAG, String.format("onMainResume(): detected quick chooser dismissal; treating as canceled (duration: %d ms).", duration));
+				Log.d(LOG_TAG, String.format(
+							"onMainResume(): detected quick chooser dismissal; treating as canceled (duration: %d ms).",
+							duration));
 				GodotPlugin.emitSignal(getGodot(), getPluginName(), SHARE_CANCELED_SIGNAL);
 			}
 
