@@ -16,6 +16,8 @@
 		0795A1D62F34A90300AD567C /* share_plugin_bootstrap.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0795A1D22F34A90300AD567C /* share_plugin_bootstrap.mm */; };
 		0795A1D72F34A90300AD567C /* ActiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0795A1CD2F34A90300AD567C /* ActiveViewController.swift */; };
 		0795A1D82F34A90300AD567C /* share_plugin.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0795A1D02F34A90300AD567C /* share_plugin.mm */; };
+		07D855C32FD825AB00B5CC05 /* ReceivedSharedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D855C12FD825AB00B5CC05 /* ReceivedSharedData.swift */; };
+		07D855C42FD825AB00B5CC05 /* ShareTargetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D855C22FD825AB00B5CC05 /* ShareTargetManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -43,6 +45,8 @@
 		0795A1D12F34A90300AD567C /* share_plugin_bootstrap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = share_plugin_bootstrap.h; sourceTree = "<group>"; };
 		0795A1D22F34A90300AD567C /* share_plugin_bootstrap.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = share_plugin_bootstrap.mm; sourceTree = "<group>"; };
 		0795A1D32F34A90300AD567C /* share_plugin-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "share_plugin-Bridging-Header.h"; sourceTree = "<group>"; };
+		07D855C12FD825AB00B5CC05 /* ReceivedSharedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedSharedData.swift; sourceTree = "<group>"; };
+		07D855C22FD825AB00B5CC05 /* ShareTargetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareTargetManager.swift; sourceTree = "<group>"; };
 		90CAAA9424E71FF10013969F /* libshare_plugin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libshare_plugin.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -95,6 +99,8 @@
 		07C98E092F3348BA002D3480 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				07D855C12FD825AB00B5CC05 /* ReceivedSharedData.swift */,
+				07D855C22FD825AB00B5CC05 /* ShareTargetManager.swift */,
 				0795A1CD2F34A90300AD567C /* ActiveViewController.swift */,
 				0795A1CE2F34A90300AD567C /* Share.swift */,
 				0795A1CF2F34A90300AD567C /* share_plugin.h */,
@@ -239,6 +245,8 @@
 				0795A1D62F34A90300AD567C /* share_plugin_bootstrap.mm in Sources */,
 				0795A1D72F34A90300AD567C /* ActiveViewController.swift in Sources */,
 				0795A1D82F34A90300AD567C /* share_plugin.mm in Sources */,
+				07D855C32FD825AB00B5CC05 /* ReceivedSharedData.swift in Sources */,
+				07D855C42FD825AB00B5CC05 /* ShareTargetManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

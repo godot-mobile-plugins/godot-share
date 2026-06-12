@@ -50,7 +50,8 @@ public final class SharePluginFixtures {
 	/** A custom threshold value used by tests that exercise the override path. */
 	public static final long CUSTOM_THRESHOLD_MS = 8_000L;
 
-	private SharePluginFixtures() {}
+	private SharePluginFixtures() {
+	}
 
 	// =========================================================================
 	// Dictionary mock factories

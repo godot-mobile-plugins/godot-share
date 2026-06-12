@@ -10,16 +10,16 @@
 //
 //   [key window root VC]
 //       │
-//       └─► while (presentedViewController != nil) → climb to topmost presented VC
+//       └-► while (presentedViewController != nil) → climb to topmost presented VC
 //               │
-//               ├─► if UINavigationController  → return topViewController
+//               ├-► if UINavigationController  → return topViewController
 //               │
-//               └─► if UITabBarController      → selectedViewController
+//               └-► if UITabBarController      → selectedViewController
 //                       │
-//                       └─► if UINavigationController → return topViewController
+//                       └-► if UINavigationController → return topViewController
 //
 // Environment detection
-// ─────────────────────
+// ---------------------
 // In a standalone xctest process (no host app) the UIWindowScene connected to
 // the process is not in the `foregroundActive` state.  `getActiveViewController`
 // falls back to `UIApplication.shared.windows.first`, which only includes
@@ -34,7 +34,7 @@
 // dependent tests skip gracefully rather than fail.
 //
 // Test structure
-// ──────────────
+// --------------
 // • Tests that need a specific VC hierarchy:
 //     1. Call `let window = try requireWindow()`.
 //     2. Replace `window.rootViewController` with the desired controller.
@@ -54,8 +54,8 @@
 // because `UIViewController.present` requires a foreground-active scene.
 //
 
-import XCTest
 @testable import share_plugin
+import XCTest
 
 final class ActiveViewControllerTests: XCTestCase {
 
@@ -138,7 +138,7 @@ final class ActiveViewControllerTests: XCTestCase {
 		)
 	}
 
-	// MARK: - Smoke tests (no window required) ────────────────────────────────────
+	// MARK: - Smoke tests (no window required) ------------------------------------
 
 	func testGetActiveViewController_DoesNotCrash() {
 		XCTAssertNoThrow(ActiveViewController.getActiveViewController())
@@ -155,7 +155,7 @@ final class ActiveViewControllerTests: XCTestCase {
 		if let result { XCTAssert(result is UIViewController) }
 	}
 
-	// MARK: - Plain Root ──────────────────────────────────────────────────────────
+	// MARK: - Plain Root ----------------------------------------------------------
 
 	func testGetActiveViewController_WithPlainRootVC_ReturnsNonNil() throws {
 		_ = try requireWindow()
@@ -177,7 +177,7 @@ final class ActiveViewControllerTests: XCTestCase {
 		XCTAssertEqual(ActiveViewController.getActiveViewController(), root)
 	}
 
-	// MARK: - UINavigationController ──────────────────────────────────────────────
+	// MARK: - UINavigationController ----------------------------------------------
 
 	func testGetActiveViewController_RootIsNavController_ReturnsTopVC() throws {
 		let window = try requireWindow()
@@ -231,7 +231,7 @@ final class ActiveViewControllerTests: XCTestCase {
 		)
 	}
 
-	// MARK: - UITabBarController ───────────────────────────────────────────────────
+	// MARK: - UITabBarController ---------------------------------------------------
 
 	func testGetActiveViewController_TabBar_ReturnsFirstSelectedVC() throws {
 		let window = try requireWindow()
@@ -274,7 +274,7 @@ final class ActiveViewControllerTests: XCTestCase {
 		)
 	}
 
-	// MARK: - UITabBarController with embedded UINavigationController ─────────────
+	// MARK: - UITabBarController with embedded UINavigationController -------------
 
 	func testGetActiveViewController_TabBarWithNavigation_ReturnsTopVC() throws {
 		let window = try requireWindow()
@@ -325,7 +325,7 @@ final class ActiveViewControllerTests: XCTestCase {
 		XCTAssertEqual(ActiveViewController.getActiveViewController(), topVC)
 	}
 
-	// MARK: - Presented View Controllers ──────────────────────────────────────────
+	// MARK: - Presented View Controllers ------------------------------------------
 
 	func testGetActiveViewController_WithOnePresentedVC_ReturnsPresentedVC() throws {
 		let window = try requireWindow()
@@ -350,7 +350,7 @@ final class ActiveViewControllerTests: XCTestCase {
 		let topmostVC = UIViewController()
 		window.rootViewController = baseVC
 
-		try present(middleVC,  on: baseVC)
+		try present(middleVC, on: baseVC)
 		try present(topmostVC, on: middleVC)
 
 		XCTAssertEqual(
@@ -389,7 +389,7 @@ final class ActiveViewControllerTests: XCTestCase {
 		XCTAssertEqual(ActiveViewController.getActiveViewController(), presentedVC)
 	}
 
-	// MARK: - After Dismissal ─────────────────────────────────────────────────────
+	// MARK: - After Dismissal -----------------------------------------------------
 
 	func testGetActiveViewController_AfterDismissal_ReturnsBaseVC() throws {
 		let window = try requireWindow()

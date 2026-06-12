@@ -7,14 +7,14 @@
 // Unit tests for Share.swift and the ShareResult ObjC-bridged enum.
 //
 // Organisation
-// ─────────────
+// -------------
 // ShareResultTests   – raw-value and ObjC-bridging tests; no @available guard
 //                      because ShareResult itself carries none.
 // ShareTests         – init and share() behaviour tests; guarded @available(iOS 16.0, *)
 //                      because Share requires it.
 //
 // Test strategy
-// ──────────────
+// --------------
 // share() has two synchronous early-exit paths that are the primary focus of
 // unit tests:
 //
@@ -36,8 +36,8 @@
 // that was triggered.
 //
 
-import XCTest
 @testable import share_plugin
+import XCTest
 
 // MARK: - ShareResult tests -------------------------------------------------------
 
@@ -74,7 +74,7 @@ final class ShareResultTests: XCTestCase {
 
 	func testOutOfBoundsRawValues_ReturnNil() {
 		XCTAssertNil(ShareResult(rawValue: -1))
-		XCTAssertNil(ShareResult(rawValue:  3))
+		XCTAssertNil(ShareResult(rawValue: 3))
 	}
 
 	/// Verifies case identity so accidental reordering is caught immediately.
@@ -126,7 +126,7 @@ final class ShareTests: XCTestCase {
 		super.tearDown()
 	}
 
-	// MARK: - Initialisation ──────────────────────────────────────────────────────
+	// MARK: - Initialisation ------------------------------------------------------
 
 	func testInit_NoArguments_AllPropertiesNil() {
 		let share = ShareFixtures.empty()
@@ -140,16 +140,16 @@ final class ShareTests: XCTestCase {
 
 	func testInit_AllArguments_StoredUnchanged() {
 		let share = Share(
-			title:    ShareTestData.title,
-			subject:  ShareTestData.subject,
-			content:  ShareTestData.content,
+			title: ShareTestData.title,
+			subject: ShareTestData.subject,
+			content: ShareTestData.content,
 			filePath: "/tmp/doc.pdf",
 			mimeType: ShareTestData.pdfMime
 		)
 
-		XCTAssertEqual(share.title,    ShareTestData.title)
-		XCTAssertEqual(share.subject,  ShareTestData.subject)
-		XCTAssertEqual(share.content,  ShareTestData.content)
+		XCTAssertEqual(share.title, ShareTestData.title)
+		XCTAssertEqual(share.subject, ShareTestData.subject)
+		XCTAssertEqual(share.content, ShareTestData.content)
 		XCTAssertEqual(share.filePath, "/tmp/doc.pdf")
 		XCTAssertEqual(share.mimeType, ShareTestData.pdfMime)
 	}
@@ -187,7 +187,7 @@ final class ShareTests: XCTestCase {
 		XCTAssertNil(share.mimeType)
 	}
 
-	// MARK: - share() — synchronous failure: no items ─────────────────────────────
+	// MARK: - share() — synchronous failure: no items -----------------------------
 	//
 	// buildItemsToShare() returns an empty array when:
 	//   • content is nil or empty, AND
@@ -317,7 +317,7 @@ final class ShareTests: XCTestCase {
 		waitForExpectations(timeout: 2)
 	}
 
-	// MARK: - share() — item building: text ───────────────────────────────────────
+	// MARK: - share() — item building: text ---------------------------------------
 	//
 	// These tests use *inverted* XCTestExpectations: the test PASSES when the
 	// "No items to share" failure is NOT called within the timeout.  This confirms
@@ -354,7 +354,7 @@ final class ShareTests: XCTestCase {
 		waitForExpectations(timeout: 0.3)
 	}
 
-	// MARK: - share() — item building: files ──────────────────────────────────────
+	// MARK: - share() — item building: files --------------------------------------
 
 	func testShare_PlainTextFile_DoesNotTriggerNoItemsFailure() throws {
 		guard testWindow != nil else { throw XCTSkip("Requires simulator") }
@@ -440,7 +440,7 @@ final class ShareTests: XCTestCase {
 		waitForExpectations(timeout: 0.3)
 	}
 
-	// MARK: - share() — file:// URI stripping ─────────────────────────────────────
+	// MARK: - share() — file:// URI stripping -------------------------------------
 
 	func testShare_FileURIPrefix_IsStrippedAndFileIsResolved() throws {
 		// Godot passes paths as "file:///var/…"; the plugin must strip the prefix
@@ -479,7 +479,7 @@ final class ShareTests: XCTestCase {
 		waitForExpectations(timeout: 0.3)
 	}
 
-	// MARK: - share() — non-existent files ────────────────────────────────────────
+	// MARK: - share() — non-existent files ----------------------------------------
 
 	func testShare_NonExistentImagePath_FallsBackToURLItem() throws {
 		// Same logic as the URI test above, but with a bare path.

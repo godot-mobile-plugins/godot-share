@@ -78,3 +78,4 @@ script = ExtResource("3_i1lxr")
 [connection signal="share_canceled" from="Share" to="." method="_on_share_share_canceled"]
 [connection signal="share_completed" from="Share" to="." method="_on_share_share_completed"]
 [connection signal="share_failed" from="Share" to="." method="_on_share_share_failed"]
+[connection signal="share_received" from="Share" to="." method="_on_share_share_received"]

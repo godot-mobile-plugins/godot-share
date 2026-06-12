@@ -15,6 +15,12 @@ const IOS_LINKER_FLAGS: Array = [ @iosLinkerFlags@ ]
 const IOS_BUNDLE_FILES: Array = [ @iosBundleFiles@ ]
 const SPM_DEPENDENCIES: Array = [ @spmDependencies@ ]
 
+# ---------------------------------------------------------------------------
+# Android manifest additions
+# ---------------------------------------------------------------------------
+
+## FileProvider for outgoing file shares (existing).
+## Substitution: [PLUGIN_PACKAGE, package/unique_name]
 const PROVIDER_TAG = """
 <provider android:name="%s.ShareFileProvider"
 		android:exported="false"
@@ -22,6 +28,79 @@ const PROVIDER_TAG = """
 		android:grantUriPermissions="true">
 	<meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/file_provider_paths"/>
 </provider>
+"""
+
+## Declares {@code ShareTargetActivity} in the app manifest (incoming share – new).
+##
+## A real [code]<activity>[/code] is used instead of [code]<activity-alias>[/code]
+## because Android's PackageParser validates alias targets against activities already
+## parsed in the same XML pass. Godot inserts manifest additions before the main
+## [code]<activity>[/code], so an alias always fails with
+## [code]INSTALL_PARSE_FAILED_MANIFEST_MALFORMED (parsedActivities = [])[/code].
+## A standalone activity declaration has no such ordering constraint.
+##
+## The activity is [b]disabled by default[/b] ([code]android:enabled="false"[/code]).
+## Call [method Share.set_share_target](true) at runtime to make the app appear in
+## Android's share sheet. Persist the preference across launches and restore on startup.
+##
+## Substitution: [PLUGIN_PACKAGE]
+const SHARE_TARGET_ACTIVITY_TAG = """
+<activity
+		android:name="%s.ShareTargetActivity"
+		android:enabled="false"
+		android:exported="true"
+		android:noHistory="true"
+		android:excludeFromRecents="true"
+		android:theme="@android:style/Theme.NoDisplay">
+	<!-- Single-item text -->
+	<intent-filter>
+		<action android:name="android.intent.action.SEND" />
+		<category android:name="android.intent.category.DEFAULT" />
+		<data android:mimeType="text/plain" />
+	</intent-filter>
+	<!-- Single-item image -->
+	<intent-filter>
+		<action android:name="android.intent.action.SEND" />
+		<category android:name="android.intent.category.DEFAULT" />
+		<data android:mimeType="image/*" />
+	</intent-filter>
+	<!-- Single-item video -->
+	<intent-filter>
+		<action android:name="android.intent.action.SEND" />
+		<category android:name="android.intent.category.DEFAULT" />
+		<data android:mimeType="video/*" />
+	</intent-filter>
+	<!-- Single-item audio -->
+	<intent-filter>
+		<action android:name="android.intent.action.SEND" />
+		<category android:name="android.intent.category.DEFAULT" />
+		<data android:mimeType="audio/*" />
+	</intent-filter>
+	<!-- Single-item generic file (PDF, ZIP, etc.) -->
+	<intent-filter>
+		<action android:name="android.intent.action.SEND" />
+		<category android:name="android.intent.category.DEFAULT" />
+		<data android:mimeType="application/*" />
+	</intent-filter>
+	<!-- Multiple images -->
+	<intent-filter>
+		<action android:name="android.intent.action.SEND_MULTIPLE" />
+		<category android:name="android.intent.category.DEFAULT" />
+		<data android:mimeType="image/*" />
+	</intent-filter>
+	<!-- Multiple videos -->
+	<intent-filter>
+		<action android:name="android.intent.action.SEND_MULTIPLE" />
+		<category android:name="android.intent.category.DEFAULT" />
+		<data android:mimeType="video/*" />
+	</intent-filter>
+	<!-- Multiple mixed files -->
+	<intent-filter>
+		<action android:name="android.intent.action.SEND_MULTIPLE" />
+		<category android:name="android.intent.category.DEFAULT" />
+		<data android:mimeType="*/*" />
+	</intent-filter>
+</activity>
 """
 
 var android_export_plugin: AndroidExportPlugin
@@ -63,8 +142,111 @@ class AndroidExportPlugin extends EditorExportPlugin:
 		return PackedStringArray(ANDROID_DEPENDENCIES)
 
 
+	## Injects two manifest additions into the [code]<application>[/code] element:
+	## 1. The [code]ShareFileProvider[/code] [code]<provider>[/code] (outgoing share, existing).
+	## 2. The [code]ShareTargetActivity[/code] [code]<activity>[/code] (incoming share).
+	##
+	## The activity is disabled by default and toggled at runtime via [method Share.set_share_target].
 	func _get_android_manifest_application_element_contents(platform: EditorExportPlatform, debug: bool) -> String:
-		return PROVIDER_TAG % [PLUGIN_PACKAGE, get_option("package/unique_name")]
+		var __package_name: String = get_option("package/unique_name")
+		return (
+			(PROVIDER_TAG % [PLUGIN_PACKAGE, __package_name])
+			+ (SHARE_TARGET_ACTIVITY_TAG % [PLUGIN_PACKAGE])
+		)
+
+
+## Info.plist document-type registration injected when the iOS share-target export
+## option is enabled.  These entries make the Godot app appear in iOS's "Open With"
+## picker — the closest single-plugin-bundle equivalent to Android's share-target feature.
+##
+## Note: appearing as a primary share-sheet recipient (alongside Messages, Mail, etc.)
+## requires a separate Share Extension target, which is outside the scope of this plugin.
+const IOS_SHARE_TARGET_PLIST_TAG: String = """
+<key>LSSupportsOpeningDocumentsInPlace</key>
+<false/>
+<key>CFBundleDocumentTypes</key>
+<array>
+	<dict>
+		<key>CFBundleTypeName</key>
+		<string>Images</string>
+		<key>CFBundleTypeRole</key>
+		<string>Viewer</string>
+		<key>LSHandlerRank</key>
+		<string>Alternate</string>
+		<key>LSItemContentTypes</key>
+		<array>
+			<!-- Parent type covers all images; specific sub-types listed below are
+				needed so iOS matches HEIC (iPhone native) and JPEG before falling back
+				to the parent.  Both must be present for Photos-app sharing to work. -->
+			<string>public.image</string>
+			<string>public.jpeg</string>
+			<string>public.png</string>
+			<string>public.heif</string>
+			<string>public.heic</string>
+			<string>com.apple.heic</string>
+			<string>public.tiff</string>
+			<string>com.compuserve.gif</string>
+			<string>public.webp</string>
+		</array>
+	</dict>
+	<dict>
+		<key>CFBundleTypeName</key>
+		<string>Video</string>
+		<key>CFBundleTypeRole</key>
+		<string>Viewer</string>
+		<key>LSHandlerRank</key>
+		<string>Alternate</string>
+		<key>LSItemContentTypes</key>
+		<array>
+			<string>public.movie</string>
+			<string>public.video</string>
+			<string>public.mpeg-4</string>
+			<string>com.apple.quicktime-movie</string>
+		</array>
+	</dict>
+	<dict>
+		<key>CFBundleTypeName</key>
+		<string>Audio</string>
+		<key>CFBundleTypeRole</key>
+		<string>Viewer</string>
+		<key>LSHandlerRank</key>
+		<string>Alternate</string>
+		<key>LSItemContentTypes</key>
+		<array>
+			<string>public.audio</string>
+			<string>public.mp3</string>
+			<string>com.apple.m4a-audio</string>
+		</array>
+	</dict>
+	<dict>
+		<key>CFBundleTypeName</key>
+		<string>Text</string>
+		<key>CFBundleTypeRole</key>
+		<string>Viewer</string>
+		<key>LSHandlerRank</key>
+		<string>Alternate</string>
+		<key>LSItemContentTypes</key>
+		<array>
+			<string>public.plain-text</string>
+			<string>public.text</string>
+			<string>public.utf8-plain-text</string>
+		</array>
+	</dict>
+	<dict>
+		<key>CFBundleTypeName</key>
+		<string>Files</string>
+		<key>CFBundleTypeRole</key>
+		<string>Viewer</string>
+		<key>LSHandlerRank</key>
+		<string>Alternate</string>
+		<key>LSItemContentTypes</key>
+		<array>
+			<string>public.data</string>
+			<string>public.content</string>
+		</array>
+	</dict>
+</array>
+"""
 
 
 class IosExportPlugin extends EditorExportPlugin:
@@ -79,8 +261,33 @@ class IosExportPlugin extends EditorExportPlugin:
 		return PLUGIN_NAME
 
 
+	## Export option shown in Project → Export → iOS presets.
+	## When enabled, CFBundleDocumentTypes entries are injected into Info.plist
+	## so the app appears in the iOS "Open With" picker for common file types.
+	func _get_export_options(platform: EditorExportPlatform) -> Array[Dictionary]:
+		if not _supports_platform(platform):
+			return []
+		return [
+			{
+				"option": {
+					"name": "share_target/enable_share_target",
+					"type": TYPE_BOOL,
+				},
+				"default_value": false,
+			}
+		]
+
+
 	func _export_begin(_features: PackedStringArray, _is_debug: bool, _path: String, _flags: int) -> void:
 		if _supports_platform(get_export_platform()):
+			# Diagnostic: log whether the share-target plist option is active.
+			var __enabled: bool = get_option("share_target/enable_share_target")
+			GmpLogger.log_info("[SharePlugin] iOS export – share_target/enable_share_target = %s"
+					% str(__enabled))
+
+			if __enabled:
+				add_apple_embedded_platform_plist_content(IOS_SHARE_TARGET_PLIST_TAG)
+
 			for __framework in IOS_FRAMEWORKS:
 				add_apple_embedded_platform_framework(__framework)
 

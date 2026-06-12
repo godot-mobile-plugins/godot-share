@@ -88,8 +88,8 @@ class SharePluginTest {
 	void setUp() throws Exception {
 		plugin = new SharePlugin(mockGodot);
 		signalCompleted = getStaticField("SHARE_COMPLETED_SIGNAL");
-		signalCanceled  = getStaticField("SHARE_CANCELED_SIGNAL");
-		signalFailed    = getStaticField("SHARE_FAILED_SIGNAL");
+		signalCanceled = getStaticField("SHARE_CANCELED_SIGNAL");
+		signalFailed = getStaticField("SHARE_FAILED_SIGNAL");
 	}
 
 	// =========================================================================
@@ -575,14 +575,14 @@ class SharePluginTest {
 		 * The returned receiver can be invoked freely in the calling test's own mock scope.</p>
 		 */
 		private BroadcastReceiver runShareAndCaptureReceiver() throws Exception {
-			PendingIntent mockPI    = mock(PendingIntent.class);
+			PendingIntent mockPI = mock(PendingIntent.class);
 			Intent        mockChooser = mock(Intent.class);
 
 			ArgumentCaptor<BroadcastReceiver> receiverCaptor =
 					ArgumentCaptor.forClass(BroadcastReceiver.class);
 
-			try (MockedStatic<GodotPlugin>   gdp        = mockStatic(GodotPlugin.class);
-					MockedStatic<PendingIntent> piMock     = mockStatic(PendingIntent.class);
+			try (MockedStatic<GodotPlugin>   gdp = mockStatic(GodotPlugin.class);
+					MockedStatic<PendingIntent> piMock = mockStatic(PendingIntent.class);
 					MockedStatic<Intent>        intentMock = mockStatic(Intent.class)) {
 
 				piMock.when(() ->

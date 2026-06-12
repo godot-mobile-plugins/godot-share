@@ -4,12 +4,12 @@
 
 class_name SharedData extends RefCounted
 
-const DATA_KEY_TITLE = "title"
-const DATA_KEY_SUBJECT = "subject"
-const DATA_KEY_CONTENT = "content"
-const DATA_KEY_FILE_PATH = "file_path"
-const DATA_KEY_MIME_TYPE = "mime_type"
-const DATA_KEY_CUSTOM_THRESHOLD_MS = "custom_threshold"
+const DATA_KEY_TITLE := &"title"
+const DATA_KEY_SUBJECT := &"subject"
+const DATA_KEY_CONTENT := &"content"
+const DATA_KEY_FILE_PATH := &"file_path"
+const DATA_KEY_MIME_TYPE := &"mime_type"
+const DATA_KEY_CUSTOM_THRESHOLD_MS := &"custom_threshold"
 
 var _data: Dictionary
 

@@ -8,7 +8,7 @@
 // entire share plugin test suite.
 //
 // IMPORTANT — SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY
-// ────────────────────────────────────────────────────────────
+// ------------------------------------------------------------
 // This target has SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES, which
 // enforces Swift 6-style per-file imports.  A @testable import in ShareTests.swift
 // does NOT make `Share` or `ActiveViewController` visible here.  This file must
@@ -16,8 +16,8 @@
 //
 
 import Foundation
-import UIKit
 @testable import share_plugin
+import UIKit
 
 // MARK: - String / MIME constants -------------------------------------------------
 
@@ -69,7 +69,7 @@ enum ShareFixtures {
 	/// ``Share`` with title, subject, and body text all populated.
 	static func fullText() -> Share {
 		Share(
-			title:   ShareTestData.title,
+			title: ShareTestData.title,
 			subject: ShareTestData.subject,
 			content: ShareTestData.content
 		)
