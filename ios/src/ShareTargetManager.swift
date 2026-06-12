@@ -123,7 +123,7 @@ import UIKit
 			Self.logger.debug("willEnterForeground: installing interceptor via scene delegate")
 			installInterceptor(on: type(of: delegate))
 		} else if let appDelegate = UIApplication.shared.delegate {
-			Self.logger.debug("willEnterForeground: scene.delegate nil – trying AppDelegate")
+			Self.logger.debug("willEnterForeground: scene.delegate nil - trying AppDelegate")
 			installInterceptor(on: type(of: appDelegate))
 		}
 	}
@@ -135,7 +135,7 @@ import UIKit
 			Self.logger.debug("willConnect: installing interceptor via scene delegate")
 			installInterceptor(on: type(of: delegate))
 		} else if let appDelegate = UIApplication.shared.delegate {
-			Self.logger.debug("willConnect: scene.delegate nil – trying AppDelegate")
+			Self.logger.debug("willConnect: scene.delegate nil - trying AppDelegate")
 			installInterceptor(on: type(of: appDelegate))
 		}
 	}
@@ -182,7 +182,7 @@ import UIKit
 
 		// Guard: already installed on this class.
 		if class_getInstanceMethod(cls, savedSel) != nil {
-			Self.logger.debug("Interceptor already present on \(NSStringFromClass(cls)) – skip")
+			Self.logger.debug("Interceptor already present on \(NSStringFromClass(cls)) - skip")
 			return
 		}
 
@@ -199,7 +199,7 @@ import UIKit
 				}
 				// Process each delivered URL context.
 				Self.logger.info(
-					"scene:openURLContexts: intercepted – \(urlContextsNS.count) context(s)"
+					"scene:openURLContexts: intercepted - \(urlContextsNS.count) context(s)"
 				)
 				for case let ctx as UIOpenURLContext in urlContextsNS {
 					self?.processURL(ctx.url)
@@ -225,7 +225,7 @@ import UIKit
 			} else {
 				// savedSel add failed → race condition; another thread beat us.
 				Self.logger.warning(
-					"class_addMethod for savedSel failed on \(NSStringFromClass(cls)) – concurrent install?"
+					"class_addMethod for savedSel failed on \(NSStringFromClass(cls)) - concurrent install?"
 				)
 			}
 		} else {
@@ -242,7 +242,7 @@ import UIKit
 	private func processURL(_ url: URL) {
 		let key = url.absoluteString
 		guard !processedURLStrings.contains(key) else {
-			Self.logger.debug("Already processed URL – skipping: \(key)")
+			Self.logger.debug("Already processed URL - skipping: \(key)")
 			return
 		}
 		processedURLStrings.insert(key)
@@ -252,7 +252,7 @@ import UIKit
 			return
 		}
 		Self.logger.info(
-			"Share received – mimeType: \(data.mimeType), files: \(data.filePaths), text: \(data.text)"
+			"Share received - mimeType: \(data.mimeType), files: \(data.filePaths), text: \(data.text)"
 		)
 		pendingData = data
 	}
@@ -281,7 +281,7 @@ import UIKit
 	/// turn polled by `Share._notification(NOTIFICATION_APPLICATION_RESUMED)` on iOS.
 	public func consumePendingData() -> ReceivedSharedData? {
 		guard isEnabled() else {
-			Self.logger.debug("consumePendingData: share target disabled – returning nil")
+			Self.logger.debug("consumePendingData: share target disabled - returning nil")
 			return nil
 		}
 		let data = pendingData

@@ -44,7 +44,7 @@ import java.util.Set;
  *   <li>Falls back to lifecycle detection ({@code onResume}) when the callback is unavailable.</li>
  * </ul>
  *
- * <h3>Incoming shares – share-target mode (new functionality)</h3>
+ * <h3>Incoming shares - share-target mode (new functionality)</h3>
  * <p>Call {@link #set_share_target(boolean) set_share_target(true)} from GDScript to enable this app
  * as a share-target in Android's share sheet. This toggles the {@link ShareTargetActivity}
  * {@code <activity>} declared in the manifest (injected automatically by the Godot editor
@@ -72,7 +72,7 @@ import java.util.Set;
  *
  * <h3>Notes</h3>
  * <ul>
- *   <li>Outgoing shares never guarantee the receiving app actually completed sending – Android
+ *   <li>Outgoing shares never guarantee the receiving app actually completed sending - Android
  *       does not provide that information.</li>
  *   <li>Received files are copied to {@code getCacheDir()/share_received/}; Android manages
  *       cache eviction automatically.</li>
@@ -119,7 +119,7 @@ public class SharePlugin extends GodotPlugin {
 			new SignalInfo("share_received", Dictionary.class);
 
 	// -------------------------------------------------------------------------
-	// State – outgoing share
+	// State - outgoing share
 	// -------------------------------------------------------------------------
 
 	private Activity activity;
@@ -132,7 +132,7 @@ public class SharePlugin extends GodotPlugin {
 	private long shareStartTime;
 
 	// -------------------------------------------------------------------------
-	// State – incoming share
+	// State - incoming share
 	// -------------------------------------------------------------------------
 
 	/**
@@ -157,7 +157,7 @@ public class SharePlugin extends GodotPlugin {
 
 	/**
 	 * The last successfully parsed incoming share payload, retained so GDScript can
-	 * call {@link #get_received_data()} in {@code _ready()} to consume data that arrived
+	 * call {@link #getReceivedData()} in {@code _ready()} to consume data that arrived
 	 * before signals were connected (i.e. the app was launched directly by a share action).
 	 */
 	private Dictionary lastReceivedData;
@@ -188,7 +188,7 @@ public class SharePlugin extends GodotPlugin {
 	}
 
 	// =========================================================================
-	// Public API – outgoing share (unchanged)
+	// Public API - outgoing share (unchanged)
 	// =========================================================================
 
 	@UsedByGodot
@@ -332,7 +332,7 @@ public class SharePlugin extends GodotPlugin {
 	}
 
 	// =========================================================================
-	// Public API – incoming share / share-target mode (new)
+	// Public API - incoming share / share-target mode (new)
 	// =========================================================================
 
 	/**
@@ -366,7 +366,7 @@ public class SharePlugin extends GodotPlugin {
 			Log.d(LOG_TAG, "set_share_target: " + (enabled ? "enabled" : "disabled")
 					+ " (" + target.flattenToShortString() + ")");
 		} catch (IllegalArgumentException e) {
-			Log.e(LOG_TAG, "set_share_target: component not found – ensure ShareTargetActivity"
+			Log.e(LOG_TAG, "set_share_target: component not found - ensure ShareTargetActivity"
 					+ " is present in the exported app's AndroidManifest.xml."
 					+ " The export plugin in SharePlugin.gd injects it automatically.", e);
 		} catch (Exception e) {
@@ -429,7 +429,7 @@ public class SharePlugin extends GodotPlugin {
 		// processing in onMainResume() once the Godot engine is fully ready.
 		Intent launchIntent = activity.getIntent();
 		if (isShareIntent(launchIntent)) {
-			Log.d(LOG_TAG, "onMainCreate(): launch intent is a share intent – deferring to onMainResume.");
+			Log.d(LOG_TAG, "onMainCreate(): launch intent is a share intent - deferring to onMainResume.");
 			pendingIncomingIntent = launchIntent;
 		}
 
@@ -464,10 +464,10 @@ public class SharePlugin extends GodotPlugin {
 		//
 		// Two sources for an incoming share intent:
 		//
-		//   1. pendingIncomingIntent – set in onMainCreate() when the app was cold-started
+		//   1. pendingIncomingIntent - set in onMainCreate() when the app was cold-started
 		//      by a share action. This path is authoritative for the launch case.
 		//
-		//   2. activity.getIntent() – Godot's GodotApp activity calls setIntent(intent)
+		//   2. activity.getIntent() - Godot's GodotApp activity calls setIntent(intent)
 		//      inside its own onNewIntent(), so getIntent() reflects any new intent
 		//      delivered while the app was already running (singleTask launch mode).
 		//      Object-identity comparison against lastHandledIncomingIntent prevents
@@ -476,7 +476,7 @@ public class SharePlugin extends GodotPlugin {
 		Intent toProcess = pendingIncomingIntent;
 		pendingIncomingIntent = null;
 
-		if (toProcess == null) {
+		if (toProcess == null && activity != null) {
 			Intent current = activity.getIntent();
 			if (isShareIntent(current) && current != lastHandledIncomingIntent) {
 				toProcess = current;

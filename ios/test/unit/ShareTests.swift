@@ -8,9 +8,9 @@
 //
 // Organisation
 // -------------
-// ShareResultTests   – raw-value and ObjC-bridging tests; no @available guard
+// ShareResultTests   - raw-value and ObjC-bridging tests; no @available guard
 //                      because ShareResult itself carries none.
-// ShareTests         – init and share() behaviour tests; guarded @available(iOS 16.0, *)
+// ShareTests         - init and share() behaviour tests; guarded @available(iOS 16.0, *)
 //                      because Share requires it.
 //
 // Test strategy

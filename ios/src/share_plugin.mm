@@ -107,7 +107,7 @@ Error SharePlugin::share(const Dictionary &sharedData) {
 
 		return OK;
 	} else {
-		NSLog(@"SharePlugin::share – requires iOS 16.0 or later");
+		NSLog(@"SharePlugin::share - requires iOS 16.0 or later");
 		this->emit_signal(SIGNAL_NAME_SHARE_FAILED, String("share() requires iOS 16.0 or later"));
 		return ERR_UNAVAILABLE;
 	}
@@ -137,7 +137,7 @@ Dictionary SharePlugin::get_received_data() {
 		return result;
 	}
 
-	NSLog(@"SharePlugin::get_received_data – returning payload (mimeType: %@)", data.mimeType);
+	NSLog(@"SharePlugin::get_received_data - returning payload (mimeType: %@)", data.mimeType);
 
 	result["mime_type"] = String(data.mimeType.UTF8String);
 	result["text"] = String(data.text.UTF8String);
