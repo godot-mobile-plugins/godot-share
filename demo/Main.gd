@@ -24,6 +24,11 @@ func _ready() -> void:
 		_ios_texture_rect.hide()
 		_active_texture_rect = _android_texture_rect
 
+	# Restore share-target registration.
+	# In a real app, persist this preference (e.g. ProjectSettings or a save file)
+	# and read it here instead of always passing true.
+	share.set_share_target(true)
+
 
 func _on_share_texture_button_pressed() -> void:
 	_print_to_screen("Sharing texture")
@@ -45,6 +50,10 @@ func _on_share_share_canceled() -> void:
 
 func _on_share_share_failed(a_error_message: String) -> void:
 	_print_to_screen("Share failed due to %s" % a_error_message)
+
+
+func _on_share_share_received(received_data: ReceivedSharedData) -> void:
+	_print_to_screen("Share received - mime type %s" % received_data.get_mime_type())
 
 
 func _print_to_screen(a_message: String, a_is_error: bool = false) -> void:

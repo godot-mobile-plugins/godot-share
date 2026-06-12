@@ -16,7 +16,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 config/name="Share Demo"
 run/main_scene="res://Main.tscn"
-config/features=PackedStringArray("4.6", "GL Compatibility")
+config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="uid://m4tg7rfoxxbk"
 
 [display]
@@ -29,7 +29,7 @@ window/handheld/orientation=1
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/SharePlugin/plugin.cfg")
+enabled=PackedStringArray("res://addons/GMPShared/menu/plugin.cfg", "res://addons/SharePlugin/plugin.cfg")
 
 [rendering]
 
